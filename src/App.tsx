@@ -76,6 +76,34 @@ function App() {
 
   const [cartItems, setcartItems] = useState(["Product1", "Product2"]);
 
+  const [games, setGame] = useState({
+    id: 1,
+    player: {
+      name: "john",
+    },
+  });
+
+  const handleUpdateGames = () => {
+    setGame({ ...games, player: { ...games.player, name: "Bob" } });
+    console.log(games.player.name);
+  };
+
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      { id: 1, title: "Product 1", quantity: 1 },
+      { id: 2, title: "Product 2", quantity: 5 },
+    ],
+  });
+
+  const handleUpdateCart = () => {
+    setCart({
+      ...cart,
+      items: cart.items.map((item) =>
+        item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    });
+  };
   return (
     <div>
       <NavBar cartItemsCount={cartItems.length} />
@@ -111,6 +139,14 @@ function App() {
         </li>
       ))}
       <button onClick={handleUpdateBugs}>Update Bugs </button> <br />
+      {games.player.name}
+      <button onClick={handleUpdateGames}>Update Game </button> <br />
+      {cart.items.map((item) => (
+        <li key={item.id}>
+          {item.title} - {item.quantity}
+        </li>
+      ))}
+      <button onClick={handleUpdateCart}>Update Cart </button> <br />
     </div>
   );
 }
