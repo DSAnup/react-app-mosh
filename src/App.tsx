@@ -33,6 +33,22 @@ function App() {
     });
   };
 
+  const [tags, setTags] = useState(["happy", "cheerful"]);
+  const handleAddTags = () => {
+    // Add
+    setTags([...tags, "Existing"]);
+  };
+
+  const handleUpdateTags = () => {
+    //Update
+    setTags(tags.map((tag) => (tag === "happy" ? "happiness" : tag)));
+  };
+
+  const handleRemoveTags = () => {
+    //Remove
+    setTags(tags.filter((tag) => tag !== "happiness"));
+  };
+
   const [alertVisible, setAlertVisibility] = useState(false);
   return (
     <div>
@@ -53,6 +69,13 @@ function App() {
       <p>{drink.price}</p>
       <p>{customer.address.zipcode}</p>
       <button onClick={handleClick}>Change Price & Customer</button>
+      <br />
+      {tags.map((tag) => (
+        <li key={tag}>{tag}</li>
+      ))}
+      <button onClick={handleAddTags}>Add Array </button> <br />
+      <button onClick={handleUpdateTags}>Update Array </button> <br />
+      <button onClick={handleRemoveTags}>Remove Array </button> <br />
     </div>
   );
 }
