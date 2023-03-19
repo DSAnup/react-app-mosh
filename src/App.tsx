@@ -4,6 +4,7 @@ import Button from "./components/Button/Button";
 import ListGroup from "./components/ListGroup";
 import Like from "./components/Like";
 import "./App.css";
+import produce from "immer";
 
 function App() {
   let items = ["New York", "Singapore", "Dhaka"];
@@ -55,10 +56,17 @@ function App() {
   ]);
 
   const handleUpdateBugs = () => {
+    // setBugs(
+    //   bugs.map((bug) =>
+    //     bug.id === 1 ? { ...bug, fixed: true, title: "Buging" } : bug
+    //   )
+    // );
+
     setBugs(
-      bugs.map((bug) =>
-        bug.id === 1 ? { ...bug, fixed: true, title: "Buging" } : bug
-      )
+      produce((draft) => {
+        const bug = draft.find((bug) => bug.id === 1);
+        if (bug) bug.fixed = true;
+      })
     );
   };
 
@@ -90,7 +98,9 @@ function App() {
       <button onClick={handleUpdateTags}>Update Tags </button> <br />
       <button onClick={handleRemoveTags}>Remove Tags </button> <br />
       {bugs.map((bug) => (
-        <li key={bug.id}>{bug.title}</li>
+        <li key={bug.id}>
+          {bug.title} {bug.fixed ? "Fixed" : "New"}
+        </li>
       ))}
       <button onClick={handleUpdateBugs}>Update Bugs </button> <br />
     </div>
