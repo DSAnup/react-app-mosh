@@ -12,6 +12,15 @@ function App() {
     console.log(item);
   };
 
+  const [drink, setDrink] = useState({
+    title: "Americano",
+    price: 5,
+  });
+
+  const handleClick = () => {
+    setDrink({ ...drink, price: 8 });
+  };
+
   const [alertVisible, setAlertVisibility] = useState(false);
   return (
     <div>
@@ -29,6 +38,8 @@ function App() {
         Submit
       </Button>
       <br />
+      {drink.price}
+      <button onClick={handleClick}>Change Price</button>
     </div>
   );
 }
