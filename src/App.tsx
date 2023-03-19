@@ -49,6 +49,19 @@ function App() {
     setTags(tags.filter((tag) => tag !== "happiness"));
   };
 
+  const [bugs, setBugs] = useState([
+    { id: 1, title: "Bug 1", fixed: false },
+    { id: 2, title: "Bug 2", fixed: false },
+  ]);
+
+  const handleUpdateBugs = () => {
+    setBugs(
+      bugs.map((bug) =>
+        bug.id === 1 ? { ...bug, fixed: true, title: "Buging" } : bug
+      )
+    );
+  };
+
   const [alertVisible, setAlertVisibility] = useState(false);
   return (
     <div>
@@ -73,9 +86,13 @@ function App() {
       {tags.map((tag) => (
         <li key={tag}>{tag}</li>
       ))}
-      <button onClick={handleAddTags}>Add Array </button> <br />
-      <button onClick={handleUpdateTags}>Update Array </button> <br />
-      <button onClick={handleRemoveTags}>Remove Array </button> <br />
+      <button onClick={handleAddTags}>Add Tags </button> <br />
+      <button onClick={handleUpdateTags}>Update Tags </button> <br />
+      <button onClick={handleRemoveTags}>Remove Tags </button> <br />
+      {bugs.map((bug) => (
+        <li key={bug.id}>{bug.title}</li>
+      ))}
+      <button onClick={handleUpdateBugs}>Update Bugs </button> <br />
     </div>
   );
 }
