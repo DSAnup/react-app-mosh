@@ -17,8 +17,20 @@ function App() {
     price: 5,
   });
 
+  const [customer, setCustomer] = useState({
+    name: "john",
+    address: {
+      city: "San Francisco",
+      zipcode: 94111,
+    },
+  });
+
   const handleClick = () => {
     setDrink({ ...drink, price: 8 });
+    setCustomer({
+      ...customer,
+      address: { ...customer.address, zipcode: 94588 },
+    });
   };
 
   const [alertVisible, setAlertVisibility] = useState(false);
@@ -38,8 +50,9 @@ function App() {
         Submit
       </Button>
       <br />
-      {drink.price}
-      <button onClick={handleClick}>Change Price</button>
+      <p>{drink.price}</p>
+      <p>{customer.address.zipcode}</p>
+      <button onClick={handleClick}>Change Price & Customer</button>
     </div>
   );
 }
