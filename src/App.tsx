@@ -5,6 +5,8 @@ import ListGroup from "./components/ListGroup";
 import Like from "./components/Like";
 import "./App.css";
 import produce from "immer";
+import NavBar from "./components/NavBar";
+import Cart from "./components/Cart";
 
 function App() {
   let items = ["New York", "Singapore", "Dhaka"];
@@ -71,8 +73,14 @@ function App() {
   };
 
   const [alertVisible, setAlertVisibility] = useState(false);
+
+  const [cartItems, setcartItems] = useState(["Product1", "Product2"]);
+
   return (
     <div>
+      <NavBar cartItemsCount={cartItems.length} />
+      <br />
+      <Cart cartItems={cartItems} onClear={() => setcartItems([])} />
       <Like onClick={() => console.log("Clicked")} />
       <br />
       <ListGroup
