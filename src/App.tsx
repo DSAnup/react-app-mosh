@@ -2,6 +2,7 @@ import { useState } from "react";
 import Alert from "./components/Alert";
 import Button from "./components/Button/Button";
 import ListGroup from "./components/ListGroup";
+import Like from "./components/Like";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
   const [alertVisible, setAlertVisibility] = useState(false);
   return (
     <div>
+      <Like onClick={() => console.log("Clicked")} />
+      <br />
       <ListGroup
         items={items}
         heading="Cities"
@@ -25,6 +28,7 @@ function App() {
       <Button color="primary" onClick={() => setAlertVisibility(true)}>
         Submit
       </Button>
+      <br />
     </div>
   );
 }
